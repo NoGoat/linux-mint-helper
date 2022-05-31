@@ -1,7 +1,10 @@
 //This is just a random script that I'm writing to learn C.
 //Don't expect too much functionality out of it.
 
-//Edit on May 31, 2022 11:04 PM. The code is horribly incomplete. Don't use this, it won't work.
+//Edit on May 31, 2022 11:42 AM. The code is mostly complete. Everything except settings should work. 
+//Even in settings, the only part that doesn't work is that the code doesn't write the settings changes to the file. 
+//Otherwise it works. 
+//Expect a release soon. :)
 #include <stdio.h>
 #include <unistd.h>
 #include <termios.h>
@@ -35,11 +38,7 @@ void update()
     printf("\n\n\t\tPerforming Full System Upgrade.\n\n\t\tUpdating Repos.\n\n");
     if (set[0] == 1)
     {
-        printf("\033[0;31m");
-        printf("\n\n\tCommand : "); 
-        printf("\033[0;32m");
-        printf("sudo apt update\n\n");
-        printf("\033[0m"); 
+        printf("\033[1;31m\n\n\tCommand : \033[1;32msudo apt update \033[0m \n\n"); 
     }
     fflush(stdin);
     system("sudo apt update");
@@ -49,7 +48,7 @@ void update()
     if (set[0] == 1)
     {
         fflush(0);
-        printf("\033[0;31m\n\n\tCommand : \033[0;32msudo apt upgrade \033[0m \n\n");
+        printf("\033[1;31m\n\n\tCommand : \033[1;32msudo apt upgrade \033[0m \n\n");
     }
     system("sudo apt upgrade");
     printf("\n\n\t\tPress any key to continue.");
@@ -67,7 +66,7 @@ void settings()
     while(1)
     {
         system("clear");
-        printf("\n\n\t\tSettings");
+        printf("\n\n\t\t \033[1;31mSettings \033[0m");
         printf("\n\n\t1. Show Commands");
         if(set[0] == 0)
         {
@@ -84,7 +83,7 @@ void settings()
         switch (c)
         {
             case 1: system("clear");
-                    printf("\n\n\t\tSettings");
+                    printf("\n\n\t\t \033[1;31mSettings \033[0m");
                     printf("\n\n\t1. Show Commands");
                     if(set[0] == 0)
                     {
@@ -120,50 +119,50 @@ void main()
 {
     int c,k,i,pos=0,j;
     char path[] = "preferences.txt";
-    char read[1000], sett[1000];
-    while(1)
+    char read[1000], sett[1000], character;
+    FILE *checkw,*checkr;
+    if(fopen(path,"r") == NULL)
     {
-        FILE *checkw,*checkr;
-        if(fopen(path,"r") == NULL)
-        {
-            //system("mkdir ~/.config/helper"); Will be implemented at a later date
-            fflush(stdin);
-            checkw = fopen(path,"w");
-            fflush(stdin);
-            fprintf(checkw,"ShowCommands:0;");
-            fflush(stdin);
-            fclose(checkw);
-            fflush(stdin);
-        }
-        checkr = fopen(path,"r");
+        //system("mkdir ~/.config/helper");
         fflush(stdin);
-        fgets(read, 1000, checkr);
+        checkw = fopen(path,"w");
         fflush(stdin);
-        for(i = 0 ; i < strlen(read) ; i++)
+        fprintf(checkw,"ShowCommands:0;");
+        fflush(stdin);
+        fclose(checkw);
+        fflush(stdin);
+    }
+    checkr = fopen(path,"r");
+    fflush(stdin);
+    fgets(read, 1000, checkr);
+    fflush(stdin);
+    for(i = 0 ; i < strlen(read) ; i++)
+    {
+        if(read[i] == ';')
         {
-            if(read[i] == ";")
+            for (j=pos ; j < i-1 ; j++)
             {
-                for (j=pos ; j < i-1 ; j++)
+                sett[j] == read[j];    
+            }
+            pos = i;
+            if (strcmp("ShowCommands",sett));
+            {
+                if(read[i-1] == '0')
                 {
-                    sett[j] == read[j];    
+                    set[0] = 0;
                 }
-                pos = i;
-                if (sett[j] == "ShowCommands");
+                else if(read[i-1] == '1')
                 {
-                    if(read[i-1] == "0")
-                    {
-                        set[0] = 0;
-                    }
-                    else if(read[i-1] == "1")
-                    {
-                        set[0] = 0;
-                    }
+                    set[0] = 1;
                 }
             }
         }
+    }
+    while(1)
+    {
         system("clear");
         fflush(stdin);
-        printf("\n\n\n\t\tEnter a Choice :");
+        printf("\n\n\n\t\t \033[1;31mMint Helper : \033[0m");
         printf("\n\n\t1. Perform a full system upgrade.");
         printf("\n\n\t2. Change the settings file.");
         printf("\n\n\t3. Exit this script.");
