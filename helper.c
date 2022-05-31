@@ -91,7 +91,7 @@ void settings()
                         printf("\t[*]");
                     }
                     printf("\n\n\t2. Exit");
-                    printf("\n\nDo you want to change this setting [Y\\n] :");
+                    printf("\n\nDo you want to change this setting [1\\0] :");
                     fflush(stdin);
                     scanf("%d",&ch);
                     
