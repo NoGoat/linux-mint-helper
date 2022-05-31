@@ -126,15 +126,11 @@ void main()
         FILE *checkw,*checkr;
         if(fopen(path,"r") == NULL)
         {
-            //system("mkdir ~/.config/helper");
+            //system("mkdir ~/.config/helper"); Will be implemented at a later date
             fflush(stdin);
-            printf("\nTest1\n");
             checkw = fopen(path,"w");
-            printf("\nTest2\n");
             fflush(stdin);
-            printf("\nTest3\n");
             fprintf(checkw,"ShowCommands:0;");
-            printf("\nTest4\n");
             fflush(stdin);
             fclose(checkw);
             fflush(stdin);
