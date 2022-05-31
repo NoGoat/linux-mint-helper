@@ -1,10 +1,7 @@
 //This is just a random script that I'm writing to learn C.
 //Don't expect too much functionality out of it.
 
-//Edit on May 31, 2022 11:42 AM. The code is mostly complete. Everything except settings should work. 
-//Even in settings, the only part that doesn't work is that the code doesn't write the settings changes to the file. 
-//Otherwise it works. 
-//Expect a release soon. :)
+//Edit on May 31, 2022 1:36 PM. The code is same as the v0.2 release for now.
 #include <stdio.h>
 #include <unistd.h>
 #include <termios.h>
@@ -57,7 +54,7 @@ void update()
 }
 void settings()
 {
-    FILE *setr,*setw;
+    FILE *checkr,*checkw;
     char path[] = "preferences.txt";
     int c;
     int ch;
@@ -110,7 +107,37 @@ void settings()
                         }
                     }
                     break;
-            case 2: return;
+            case 2: checkr = fopen(path,"r");
+                    fflush(stdin);
+                    fgets(read, 1000, checkr);
+                    fflush(stdin);
+                    for(i = 0 ; i < strlen(read) ; i++)
+                    {
+                        if(read[i] == ';')
+                        {
+                            for (j=pos ; j < i-1 ; j++)
+                            {
+                                sett[j] == read[j];    
+                            }
+                            pos = i;
+                            if (strcmp("ShowCommands",sett));
+                            {
+                                if(set[0] == 0)
+                                {
+                                    read[i-1] = '0';
+                                }
+                                else if(set[0] == 1)
+                                {
+                                    read[i-1] = '1';
+                                }
+                            }
+                        }
+                    }
+                    fclose(checkr);
+                    checkw = fopen(path,"w");
+                    fwrite(read,1,15,checkw);
+                    fclose(checkw);
+                    return;
         }
     }
     return;
