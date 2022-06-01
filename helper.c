@@ -1,7 +1,7 @@
 //This is just a random script that I'm writing to learn C.
 //Don't expect too much functionality out of it.
 
-//Edit on May 31, 2022 1:36 PM. The code is same as the v0.2 release for now.
+//Edit on May 31, 2022 2:50 PM. It works. For the most part
 #include <stdio.h>
 #include <unistd.h>
 #include <termios.h>
@@ -32,7 +32,7 @@ char getch(void)  //Created this since Linux doesn't have getch() functionality.
 void update()
 {
     system("clear");
-    printf("\n\n\t\tPerforming Full System Upgrade.\n\n\t\tUpdating Repos.\n\n");
+    printf("\n\n\t\t \033[1;34mPerforming Full System Upgrade.\033[0m\n\n\t\t \033[0;36mUpdating Repos.\033[0m\n\n");
     if (set[0] == 1)
     {
         printf("\033[1;31m\n\n\tCommand : \033[1;32msudo apt update \033[0m \n\n"); 
@@ -40,7 +40,7 @@ void update()
     fflush(stdin);
     system("sudo apt update");
     fflush(stdin);
-    printf("\n\n\t\tStarting the actual Upgrade Process.\n\n");
+    printf("\n\n\t\t \033[0;36mStarting the actual Upgrade Process.\033[0m\n\n");
     fflush(stdin);
     if (set[0] == 1)
     {
@@ -52,6 +52,12 @@ void update()
     fflush(stdin);
     getch();
 }
+/*void install()
+{
+    system("clear");
+    printf("\n\n\t\t \033[0;34mInstall Software.");
+
+}*/
 void settings()
 {
     FILE *checkr,*checkw;
@@ -63,7 +69,7 @@ void settings()
     while(1)
     {
         system("clear");
-        printf("\n\n\t\t \033[1;31mSettings \033[0m");
+        printf("\n\n\t\t \033[1;34mSettings \033[0m");
         printf("\n\n\t1. Show Commands");
         if(set[0] == 0)
         {
@@ -80,7 +86,7 @@ void settings()
         switch (c)
         {
             case 1: system("clear");
-                    printf("\n\n\t\t \033[1;31mSettings \033[0m");
+                    printf("\n\n\t\t \033[1;34mSettings \033[0m");
                     printf("\n\n\t1. Show Commands");
                     if(set[0] == 0)
                     {
@@ -152,7 +158,7 @@ void main()
     {
         //system("mkdir ~/.config/helper");
         fflush(stdin);
-        checkw = fopen(path,"w");
+        checkw = fopen("preferences.txt","w");
         fflush(stdin);
         fprintf(checkw,"ShowCommands:0;");
         fflush(stdin);
@@ -189,7 +195,7 @@ void main()
     {
         system("clear");
         fflush(stdin);
-        printf("\n\n\n\t\t \033[1;31mMint Helper : \033[0m");
+        printf("\n\n\n\t\t \033[1;34mMint Helper : \033[0m");
         printf("\n\n\t1. Perform a full system upgrade.");
         printf("\n\n\t2. Change the settings file.");
         printf("\n\n\t3. Exit this script.");
