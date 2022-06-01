@@ -52,12 +52,41 @@ void update()
     fflush(stdin);
     getch();
 }
-/*void install()
+void install()
 {
+    char name[1000];
+    char com[] = "sudo apt install ";
     system("clear");
-    printf("\n\n\t\t \033[0;34mInstall Software.");
-
-}*/
+    printf("\n\n\t\t \033[1;34mInstall Software. \033[0m \t");
+    printf("\n\nEnter an Application Name : ");
+    scanf("%s",name);
+    strcat(com,name);
+    if (set[0] == 1)
+    {
+        printf("\033[1;31m\n\n\tCommand : \033[1;32m%s \033[0m \n\n",com); 
+    }
+    system(com);
+    printf("\n\n\t\t Press Any Key to Continue.");
+    getch();
+}
+void uninstall()
+{
+    char name[1000];
+    char com[] = "sudo apt remove ";
+    system("clear");
+    printf("\n\n\t\t \033[1;34mRemove Software. \033[0m \t");
+    printf("\n\nEnter an Application Name : ");
+    scanf("%s",name);
+    fflush(stdin);
+    strcat(com,name);
+    if (set[0] == 1)
+    {
+        printf("\033[1;31m\n\n\tCommand : \033[1;32m%s \033[0m \n\n",com); 
+    }
+    system(com);
+    printf("\n\n\t\t Press Any Key to Continue.");
+    getch();
+}
 void settings()
 {
     FILE *checkr,*checkw;
@@ -197,17 +226,23 @@ void main()
         fflush(stdin);
         printf("\n\n\n\t\t \033[1;34mMint Helper : \033[0m");
         printf("\n\n\t1. Perform a full system upgrade.");
-        printf("\n\n\t2. Change the settings file.");
-        printf("\n\n\t3. Exit this script.");
+        printf("\n\n\t2. Install Software.");
+        printf("\n\n\t3. Remove Software.");
+        printf("\n\n\t4. Change the settings file.");
+        printf("\n\n\t5. Exit.");
         printf("\n\nEnter a Choice :");
         scanf("%d",&c);
         switch (c)
         {
             case 1: update();
                     break;
-            case 2: settings();
+            case 2: install();
                     break;
-            case 3: system("clear");
+            case 3: uninstall();
+                    break;
+            case 4: settings();
+                    break;
+            case 5: system("clear");
                     return;
         }
     }
