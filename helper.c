@@ -89,11 +89,14 @@ void uninstall()
 }
 void autoremove()
 {
+    fflush(stdout);
     system("clear");
-    printf("\n\n\t\t \033[1;34mRemoving Unused Packages.\033[0m");
+    fflush(stdout);
+    printf("\n\n\t\t \033[1;34mRemoving Unused Packages.\033[0m \n\n");
+    fflush(stdout);
     if (set[0] == 1)
     {
-        printf("\033[1;31m\n\n\tCommand : \033[1;32msudo apt autoremove \033[0m \n\n"); 
+        printf("\033[1;31m\tCommand : \033[1;32msudo apt autoremove \033[0m \n\n"); 
     }
     fflush(stdin);
     system("sudo apt autoremove");
