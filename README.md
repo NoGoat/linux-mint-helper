@@ -34,3 +34,8 @@ If it says something like "Permission Denied.", run the command
 Type
 
 > helper
+
+# Credits
+
+Since gcc doesn't have the conio library, it doesn't support pretty useful commands like getch().
+So, I ended up using [this](https://stackoverflow.com/a/16361724) code from stackoverflow.
