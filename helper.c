@@ -58,7 +58,7 @@ void install()
     char com[] = "sudo apt install ";
     system("clear");
     printf("\n\n\t\t \033[1;34mInstall Software. \033[0m \t");
-    printf("\n\nEnter an Application Name : ");
+    printf("\n\n \033[1;32mEnter an Application Name : \033[0m");
     scanf("%s",name);
     strcat(com,name);
     if (set[0] == 1)
@@ -75,7 +75,7 @@ void uninstall()
     char com[] = "sudo apt remove ";
     system("clear");
     printf("\n\n\t\t \033[1;34mRemove Software. \033[0m \t");
-    printf("\n\nEnter an Application Name : ");
+    printf("\n\n\033[1;32mEnter an Application Name : \033[0m");
     scanf("%s",name);
     fflush(stdin);
     strcat(com,name);
@@ -116,14 +116,14 @@ void settings()
         printf("\n\n\t1. Show Commands");
         if(set[0] == 0)
         {
-            printf("\t[ ]");
+            printf("\t\t[ ]");
         }
         else if(set[0] == 1)
         {
-            printf("\t[*]");
+            printf("\t\t[*]");
         }
-        printf("\n\n\t2. Exit");
-        printf("\n\nEnter a Choice to Change :");
+        printf("\n\n\t2. Go Back");
+        printf("\n\n \033[1;32mEnter a Choice to Change : \033[0m");
         scanf("%d",&c);
         fflush(stdin);
         switch (c)
@@ -133,14 +133,14 @@ void settings()
                     printf("\n\n\t1. Show Commands");
                     if(set[0] == 0)
                     {
-                        printf("\t[ ]");
+                        printf("\t\t[ ]");
                     }
                     else if(set[0] == 1)
                     {
-                        printf("\t[*]");
+                        printf("\t\t[*]");
                     }
-                    printf("\n\n\t2. Exit");
-                    printf("\n\nDo you want to change this setting [y\\n] :");
+                    printf("\n\n\t2. Go Back");
+                    printf("\n\n \033[1;32mDo you want to change this Setting [y\\n] : \033[0m");
                     fflush(stdin);
                     scanf("%s",&ch);
                     if(ch == 'y' || ch == 'Y')
@@ -244,7 +244,7 @@ void main()
         printf("\n\n\t4. Remove Unused Packages.");
         printf("\n\n\t5. Settings.");
         printf("\n\n\t6. Exit.");
-        printf("\n\nEnter a Choice :");
+        printf("\n\n \033[1;32mEnter a Choice : \033[0m");
         scanf("%d",&c);
         switch (c)
         {
