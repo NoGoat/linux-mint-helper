@@ -32,7 +32,7 @@ char getch(void)  //Created this since Linux doesn't have getch() functionality.
 void update()
 {
     system("clear");
-    printf("\n\n\t\t \033[1;34mPerforming Full System Upgrade.\033[0m\n\n\t\t \033[0;36mUpdating Repos.\033[0m\n\n");
+    printf("\n\n\t\t \033[1;34mPerforming Full System Upgrade.\033[0m\n\n\t\t \033[1;36mUpdating Repos.\033[0m\n\n");
     if (set[0] == 1)
     {
         printf("\033[1;31m\n\n\tCommand : \033[1;32msudo apt update \033[0m \n\n"); 
@@ -40,7 +40,7 @@ void update()
     fflush(stdin);
     system("sudo apt update");
     fflush(stdin);
-    printf("\n\n\t\t \033[0;36mStarting the actual Upgrade Process.\033[0m\n\n");
+    printf("\n\n\t\t \033[1;36mStarting the actual Upgrade Process.\033[0m\n\n");
     fflush(stdin);
     if (set[0] == 1)
     {
@@ -48,7 +48,7 @@ void update()
         printf("\033[1;31m\n\n\tCommand : \033[1;32msudo apt upgrade \033[0m \n\n");
     }
     system("sudo apt upgrade");
-    printf("\n\n\t\tPress any key to continue.");
+    printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
     fflush(stdin);
     getch();
 }
@@ -66,7 +66,7 @@ void install()
         printf("\033[1;31m\n\n\tCommand : \033[1;32m%s \033[0m \n\n",com); 
     }
     system(com);
-    printf("\n\n\t\t Press Any Key to Continue.");
+    printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
     getch();
 }
 void uninstall()
@@ -84,7 +84,22 @@ void uninstall()
         printf("\033[1;31m\n\n\tCommand : \033[1;32m%s \033[0m \n\n",com); 
     }
     system(com);
-    printf("\n\n\t\t Press Any Key to Continue.");
+    printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
+    getch();
+}
+void autoremove()
+{
+    system("clear");
+    printf("\n\n\t\t \033[1;34mRemoving Unused Packages.\033[0m");
+    if (set[0] == 1)
+    {
+        printf("\033[1;31m\n\n\tCommand : \033[1;32msudo apt autoremove \033[0m \n\n"); 
+    }
+    fflush(stdin);
+    system("sudo apt autoremove");
+    fflush(stdin);
+    printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
+    fflush(stdin);
     getch();
 }
 void settings()
@@ -92,8 +107,7 @@ void settings()
     FILE *checkr,*checkw;
     char path[] = "preferences.txt";
     int c;
-    int ch;
-    char read[1000], sett[1000];
+    char read[1000], sett[1000], ch;
     int k,i,pos=0,j;
     while(1)
     {
@@ -126,11 +140,10 @@ void settings()
                         printf("\t[*]");
                     }
                     printf("\n\n\t2. Exit");
-                    printf("\n\nDo you want to change this setting [1\\0] :");
+                    printf("\n\nDo you want to change this setting [y\\n] :");
                     fflush(stdin);
-                    scanf("%d",&ch);
-                    
-                    if(ch == 1)
+                    scanf("%s",&ch);
+                    if(ch == 'y' || ch == 'Y')
                     {
                         if(set[0]==1)
                         {
@@ -228,8 +241,9 @@ void main()
         printf("\n\n\t1. Perform a full system upgrade.");
         printf("\n\n\t2. Install Software.");
         printf("\n\n\t3. Remove Software.");
-        printf("\n\n\t4. Change the settings file.");
-        printf("\n\n\t5. Exit.");
+        printf("\n\n\t4. Remove Unused Packages.");
+        printf("\n\n\t5. Settings.");
+        printf("\n\n\t6. Exit.");
         printf("\n\nEnter a Choice :");
         scanf("%d",&c);
         switch (c)
@@ -240,9 +254,11 @@ void main()
                     break;
             case 3: uninstall();
                     break;
-            case 4: settings();
+            case 4: autoremove();
                     break;
-            case 5: system("clear");
+            case 5: settings();
+                    break;
+            case 6: system("clear");
                     return;
         }
     }
