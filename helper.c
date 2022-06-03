@@ -6,8 +6,18 @@
 #include <unistd.h>
 #include <termios.h>
 #include <string.h>
+#include <stdlib.h>
 
 int set[10];
+char getch();
+void update();
+void install();
+void uninstall();
+void autoremove();
+void settings();
+void shutdown();
+void restart();
+void shutdown_restart();
 char getch(void)  //Created this since Linux doesn't have getch() functionality.
 {                 //Code : https://stackoverflow.com/questions/7469139/what-is-the-equivalent-to-getch-getche-in-linux?noredirect=1&lq=1
     char buf = 0;
@@ -193,6 +203,74 @@ void settings()
     }
     return;
 }
+void shutdown()
+{
+    system("clear");
+    fflush(stdout);
+    char c;
+    printf("\n\n\t\t \033[1;34mShutdown the PC. \033[0m \t");
+    if (set[0] == 1)
+    {
+        printf("\n\n\033[1;31m\tCommand : \033[1;32mshutdown +0 \033[0m \n\n"); 
+    }
+    printf("\n\n\t\t\033[1;31mThe System will be shutdown.\n\n\t\tClose all important apps.\033[0m \n\n\t\t\033[1;32mDo you want to shutdown? [y/n] : \033[0m");
+    scanf("%s",&c);
+    printf("\n\n");
+    if (c == 'y' || c == 'Y')
+    {
+        system("shutdown +0");
+    }
+    else
+    {
+        printf("\n\n\t\t\033[1;32m Aborted. Press any key to continue. \033[0m");
+    }
+    getch();
+}
+void restart()
+{
+    system("clear");
+    fflush(stdout);
+    char c;
+    printf("\n\n\t\t \033[1;34mRestart the PC. \033[0m \t");
+    if (set[0] == 1)
+    {
+        printf("\n\n\033[1;31m\tCommand : \033[1;32mshutdown -r +0 \033[0m \n\n"); 
+    }
+    printf("\n\n\t\t\033[1;31mThe System will be Restart.\n\n\t\tClose all important apps.\033[0m \n\n\t\t\033[1;32mDo you want to shutdown? [y/n] : \033[0m");
+    scanf("%s",&c);
+    printf("\n\n");
+    if (c == 'y' || c == 'Y')
+    {
+        system("shutdown -r +0");
+    }
+    else
+    {
+        printf("\n\n\t\t\033[1;32m Aborted. Press any key to continue. \033[0m");
+    }
+    getch();
+}
+void shutdown_restart()
+{
+    while(1)
+    {
+        system("clear");
+        int c;
+        printf("\n\n\n\t\t \033[1;34mShutdown/Restart : \033[0m");
+        printf("\n\n\t1. Shutdown the PC.");
+        printf("\n\n\t2. Restart the PC.");
+        printf("\n\n\t3. Go Back.");
+        printf("\n\n \033[1;32mEnter a Choice : \033[0m");
+        scanf("%d",&c);
+        switch (c)
+        {
+            case 1: shutdown();
+                    break;
+            case 2: restart();
+                    break;
+            case 3: return;
+        }
+    }
+}
 void main()
 {
     int c,k,i,pos=0,j;
@@ -245,8 +323,9 @@ void main()
         printf("\n\n\t2. Install Software.");
         printf("\n\n\t3. Remove Software.");
         printf("\n\n\t4. Remove Unused Packages.");
-        printf("\n\n\t5. Settings.");
-        printf("\n\n\t6. Exit.");
+        printf("\n\n\t5. Shutdown/Restart the PC");
+        printf("\n\n\t6. Settings.");
+        printf("\n\n\t7. Exit.");
         printf("\n\n \033[1;32mEnter a Choice : \033[0m");
         scanf("%d",&c);
         switch (c)
@@ -259,9 +338,11 @@ void main()
                     break;
             case 4: autoremove();
                     break;
-            case 5: settings();
+            case 5: shutdown_restart();
                     break;
-            case 6: system("clear");
+            case 6: settings();
+                    break;
+            case 7: system("clear");
                     return;
         }
     }
