@@ -17,6 +17,9 @@ void autoremove();
 void settings();
 void shutdown();
 void restart();
+void shutdown_n();
+void restart_n();
+void cancel_s_r();
 void shutdown_restart();
 char getch(void)  //Created this since Linux doesn't have getch() functionality.
 {                 //Code : https://stackoverflow.com/questions/7469139/what-is-the-equivalent-to-getch-getche-in-linux?noredirect=1&lq=1
@@ -213,7 +216,7 @@ void shutdown()
     {
         printf("\n\n\033[1;31m\tCommand : \033[1;32mshutdown +0 \033[0m \n\n"); 
     }
-    printf("\n\n\t\t\033[1;31mThe System will be shutdown.\n\n\t\tClose all important apps.\033[0m \n\n\t\t\033[1;32mDo you want to shutdown? [y/n] : \033[0m");
+    printf("\n\n\t\t\033[1;31mThe System will shutdown.\n\n\t\tSave all important work.\033[0m \n\n\033[1;32mDo you want to Shutdown? [y/n] : \033[0m");
     scanf("%s",&c);
     printf("\n\n");
     if (c == 'y' || c == 'Y')
@@ -236,7 +239,7 @@ void restart()
     {
         printf("\n\n\033[1;31m\tCommand : \033[1;32mshutdown -r +0 \033[0m \n\n"); 
     }
-    printf("\n\n\t\t\033[1;31mThe System will be Restart.\n\n\t\tClose all important apps.\033[0m \n\n\t\t\033[1;32mDo you want to shutdown? [y/n] : \033[0m");
+    printf("\n\n\t\t\033[1;31mThe System will Restart.\n\n\t\tSave all important work.\033[0m \n\n\033[1;32mDo you want to Restart? [y/n] : \033[0m");
     scanf("%s",&c);
     printf("\n\n");
     if (c == 'y' || c == 'Y')
@@ -249,6 +252,90 @@ void restart()
     }
     getch();
 }
+void shutdown_n()
+{
+    system("clear");
+    fflush(stdout);
+    char ch;
+    char name[1000];
+    char com[] = "shutdown +";
+    printf("\n\n\t\t \033[1;34mShutdown the PC. \033[0m \t");
+    printf("\n\n\033[1;32mEnter the time in minutes : \033[0m");
+    scanf("%s",name);
+    strcat(com,name);
+    strcpy(name,com);
+    if (set[0] == 1)
+    {
+        printf("\n\n\033[1;31m\tCommand : \033[1;32m%s \033[0m \n\n",name); 
+    }
+    printf("\n\n\t\t\033[1;31mThe System will Shutdown soon.\n\n\t\tSave all important work.\033[0m \n\n\033[1;32mDo you want to Shutdown? [y/n] : \033[0m");
+    scanf("%s",&ch);
+    printf("\n\n");
+    if (ch == 'y' || ch == 'Y')
+    {
+        fflush(stdin);
+        fflush(stdout);
+        system(name);
+        printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
+    }
+    else
+    {
+        printf("\n\n\t\t\033[1;32m Aborted. Press any key to continue. \033[0m");
+    }
+    getch();
+}
+void restart_n()
+{
+    system("clear");
+    fflush(stdout);
+    char ch;
+    char name[1000];
+    char com[] = "shutdown -r +";
+    printf("\n\n\t\t \033[1;34mRestart the PC. \033[0m \t");
+    printf("\n\n\033[1;32mEnter the time in minutes : \033[0m");
+    scanf("%s",name);
+    strcat(com,name);
+    strcpy(name,com);
+    if (set[0] == 1)
+    {
+        printf("\n\n\033[1;31m\tCommand : \033[1;32m%s \033[0m \n\n",name); 
+    }
+    printf("\n\n\t\t\033[1;31mThe System will Restart soon.\n\n\t\tSave all important work.\033[0m \n\n\033[1;32mDo you want to Restart? [y/n] : \033[0m");
+    scanf("%s",&ch);
+    printf("\n\n");
+    fflush(stdin);
+    fflush(stdout);
+    if (ch == 'y' || ch == 'Y')
+    {
+        fflush(stdin);
+        fflush(stdout);
+        system(name);
+        printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
+    }
+    else
+    {
+        printf("\n\n\t\t\033[1;32m Aborted. Press any key to continue. \033[0m");
+    }
+    getch();
+}
+void cancel_s_r()
+{
+    fflush(stdout);
+    system("clear");
+    fflush(stdout);
+    printf("\n\n\t\t \033[1;34mCancelling a scheduled Shutdown/Restart.\033[0m \n\n");
+    fflush(stdout);
+    if (set[0] == 1)
+    {
+        printf("\033[1;31m\tCommand : \033[1;32mshutdown -c \033[0m \n\n"); 
+    }
+    fflush(stdin);
+    system("shutdown -c");
+    fflush(stdin);
+    printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
+    fflush(stdin);
+    getch();
+}   
 void shutdown_restart()
 {
     while(1)
@@ -257,17 +344,26 @@ void shutdown_restart()
         int c;
         printf("\n\n\n\t\t \033[1;34mShutdown/Restart : \033[0m");
         printf("\n\n\t1. Shutdown the PC.");
-        printf("\n\n\t2. Restart the PC.");
-        printf("\n\n\t3. Go Back.");
+        printf("\n\n\t2. Shutdown the PC after a certain time.");
+        printf("\n\n\t3. Restart the PC.");
+        printf("\n\n\t4. Restart the PC after a certain time.");
+        printf("\n\n\t5. Cancel a scheduled Shutdown/Restart.");
+        printf("\n\n\t6. Go Back.");
         printf("\n\n \033[1;32mEnter a Choice : \033[0m");
         scanf("%d",&c);
         switch (c)
         {
             case 1: shutdown();
                     break;
-            case 2: restart();
+            case 2: shutdown_n();
                     break;
-            case 3: return;
+            case 3: restart();
+                    break;
+            case 4: restart_n();
+                    break;
+            case 5: cancel_s_r();
+                    break;
+            case 6: return;
         }
     }
 }
