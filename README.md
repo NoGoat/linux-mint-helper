@@ -35,6 +35,14 @@ Type
 
 > helper
 
+# Compiling helper
+
+If you want to manually compile helper, you can compile it using the command
+
+> gcc helper.c -o helper
+
+And it can be installed using the helper-install.sh script.
+
 # Credits
 
 Since gcc doesn't have the conio library, it doesn't support pretty useful commands like getch().
