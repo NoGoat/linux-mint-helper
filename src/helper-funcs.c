@@ -3,20 +3,10 @@
 #include <termios.h>
 #include <string.h>
 #include <stdlib.h>
+#include "../includes/helper-funcs.h"
 
-int set[10];
-char getch();
-void update();
-void install();
-void uninstall();
-void autoremove();
-void settings();
-void shutdown();
-void restart();
-void shutdown_n();
-void restart_n();
-void cancel_s_r();
-void shutdown_restart();
+int set[10]; //Static so the variable is only referenced in this file no where else.
+
 char getch(void)  //Created this since Linux doesn't have getch() functionality.
 {                 //Code : https://stackoverflow.com/questions/7469139/what-is-the-equivalent-to-getch-getche-in-linux?noredirect=1&lq=1
     char buf = 0;
@@ -38,6 +28,7 @@ char getch(void)  //Created this since Linux doesn't have getch() functionality.
         perror("tcsetattr ~ICANON");
     return buf;
 }
+
 void update()
 {
     system("clear");
@@ -61,6 +52,7 @@ void update()
     fflush(stdin);
     getch();
 }
+
 void install()
 {
     char name[1000];
@@ -78,6 +70,7 @@ void install()
     printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
     getch();
 }
+
 void uninstall()
 {
     char name[1000];
@@ -96,6 +89,7 @@ void uninstall()
     printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
     getch();
 }
+
 void autoremove()
 {
     fflush(stdout);
@@ -114,6 +108,7 @@ void autoremove()
     fflush(stdin);
     getch();
 }
+
 void settings()
 {
     FILE *checkr,*checkw;
@@ -177,10 +172,10 @@ void settings()
                         {
                             for (j=pos ; j < i-1 ; j++)
                             {
-                                sett[j] == read[j];    
+                                sett[j] = read[j];    
                             }
                             pos = i;
-                            if (strcmp("ShowCommands",sett));
+                            if (strcmp("ShowCommands",sett))
                             {
                                 if(set[0] == 0)
                                 {
@@ -202,6 +197,7 @@ void settings()
     }
     return;
 }
+
 void shutdown()
 {
     system("clear");
@@ -225,6 +221,7 @@ void shutdown()
     }
     getch();
 }
+
 void restart()
 {
     system("clear");
@@ -248,6 +245,7 @@ void restart()
     }
     getch();
 }
+
 void shutdown_n()
 {
     system("clear");
@@ -280,6 +278,7 @@ void shutdown_n()
     }
     getch();
 }
+
 void restart_n()
 {
     system("clear");
@@ -314,6 +313,7 @@ void restart_n()
     }
     getch();
 }
+
 void cancel_s_r()
 {
     fflush(stdout);
@@ -331,7 +331,8 @@ void cancel_s_r()
     printf("\n\n\t\t\033[1;32m Press any key to continue. \033[0m");
     fflush(stdin);
     getch();
-}   
+}  
+
 void shutdown_restart()
 {
     while(1)

@@ -2,9 +2,11 @@
 //Don't expect too much functionality out of it.
 
 //Edit on May 31, 2022 2:50 PM. It works. For the most part
-#include "helper-functions.h"
-
-void main()
+#include "../includes/helper-funcs.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+int main()
 {
     int c,k,i,pos=0,j;
     char path[] = "preferences.txt";
@@ -31,10 +33,10 @@ void main()
         {
             for (j=pos ; j < i-1 ; j++)
             {
-                sett[j] == read[j];    
+                sett[j] = read[j];    
             }
             pos = i;
-            if (strcmp("ShowCommands",sett));
+            if (strcmp("ShowCommands",sett))
             {
                 if(read[i-1] == '0')
                 {
@@ -76,7 +78,7 @@ void main()
             case 6: settings();
                     break;
             case 7: system("clear");
-                    return;
+                    return 0;
         }
     }
 } 
