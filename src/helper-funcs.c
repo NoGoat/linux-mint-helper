@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "../includes/helper-funcs.h"
 
+//Moved the functions into a file of their own rather than leaving them in a header file for cleaner code base
+
 int set[10]; //Static so the variable is only referenced in this file no where else.
 
 char getch(void)  //Created this since Linux doesn't have getch() functionality.

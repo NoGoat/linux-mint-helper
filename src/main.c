@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
 int main()
 {
     int c,k,i,pos=0,j;
