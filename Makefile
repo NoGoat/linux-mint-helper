@@ -10,7 +10,7 @@ CSRC=$(wildcard ./src/*.c)
 COBJ=$(patsubst ./src/%.c, ./%.o, $(CSRC))
 
 #Target binary name 
-TARGET=helper
+TARGET=minthelper
 
 #Build the binary and run these requirements first 
 $(TARGET): $(COBJ)
