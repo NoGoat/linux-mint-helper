@@ -37,9 +37,9 @@ Type
 
 # Compiling helper
 
-If you want to manually compile helper, you can compile it using the command
+If you want to manually compile helper, make sure you have the c compiler `cc` installed. Then you can compile it using the command
 
-> gcc helper.c -o helper
+> make
 
 And it can be installed using the helper-install.sh script.
 
