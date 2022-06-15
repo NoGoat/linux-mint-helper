@@ -47,3 +47,5 @@ And it can be installed using the helper-install.sh script.
 
 Since gcc doesn't have the conio library, it doesn't support pretty useful commands like getch().
 So, I ended up using [this](https://stackoverflow.com/a/16361724) code from stackoverflow.
+
+And I got some help in cleaning up the code from [TrashCatiCat](https://github.com/TrashCatCait). Do check out her page.
