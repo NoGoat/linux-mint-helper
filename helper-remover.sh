@@ -1,3 +1,3 @@
-sudo rm /bin/helper
-rm ~/.helper/helper
+sudo rm /bin/minthelper
+rm ~/.helper/minthelper
 rmdir ~/.helper
