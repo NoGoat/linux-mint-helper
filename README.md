@@ -33,7 +33,7 @@ If it says something like "Permission Denied.", run the command
 
 Type
 
-> helper
+> minthelper
 
 # Compiling helper
 
